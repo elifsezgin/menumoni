@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Menumoni{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+	<link rel="stylesheet" href="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.css" />
+</head>
+<body>
+<div class="container">
+	{% if messages %}
+	<ul class="messages">
+	    {% for message in messages %}
+	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+	{% endif %}
+	<header class="header">
+		<div id="logo">
+			<a href="/">menumoni</a>
+		</div>
+		<div id="nav">
+			<a href="/">Home</a>
+			{% if user.is_authenticated %}
+{#			<a href="{% url "new_place" %}">Add place</a>#}
+			<a href="{% url "logout" %}">Log out({{ user }})</a>
+			{% else %}
+			<a href="{% url "register" %}">Register</a>
+			<a href="{% url "login" %}">Login</a>
+			{% endif %}
+		</div>
+	</header>
+	<div class="content">
+		{% block content %}
+			PLACEHOLDER
+		{% endblock %}
+	</div>
+	<footer class="footer">
+		Elif Sezgin
+	</footer>
+</div>
+
+{#<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>#}
+<script src="https://npmcdn.com/leaflet@0.7.7/dist/leaflet.js"></script>
+
+{% block js %}
+{% endblock %}
+
+</body>
+</html>
